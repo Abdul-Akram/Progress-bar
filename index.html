@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progress Bar</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #e0e0e0 ;
+        }
+
+        .progress-container {
+            width: 80%;
+            max-width: 600px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .progress-bar {
+            height: 30px;
+            background-color: #007bff;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        button {
+            padding: 12px 24px;
+            font-size: 14px;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+            color: #ffffff;
+            background-color: #007bff;
+            margin: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        button:active {
+            background-color: #004080;
+        }
+        #content{
+            padding: 1rem;
+            color: #004080;
+            font-weight: bolder;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="progress-container">
+        <div class="progress-bar" id="progress-bar"></div>
+    </div>
+    <div id="content"></div>
+    <div>
+        <button onclick="updateProgress()">Increase Progress</button>
+        <button onclick="resetProgress()">Reset Progress</button>
+    </div>
+    <script>
+        let progress = 0;
+        let content = document.getElementById("content");
+
+        function updateProgress() {
+            if (progress < 100) {
+                progress += 10;
+                document.getElementById('progress-bar').style.width = progress + '%';
+                if(progress === 10){
+                    content.innerHTML=`${progress}% - Few More Steps Away`;
+                }else if(progress===50){
+                    content.innerHTML=`${progress}% - Half Way Done`;
+                }else if(progress===100){
+                    content.innerHTML=`${progress}% - Congratulations You Have Reached`;
+                    document.getElementsByTagName("body")[0].style.backgroundColor = "rgba(183, 226, 183, 0.686)";
+                }else{
+                    content.innerHTML="";
+                }
+            }
+        }
+
+        function resetProgress() {
+            progress = 0;
+            document.getElementById('progress-bar').style.width = progress + '%';
+            document.getElementsByTagName("body")[0].style.backgroundColor = "#e0e0e0";
+        }
+    </script>
+</body>
+
+</html>
